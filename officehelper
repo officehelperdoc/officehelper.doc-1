@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OFFICEHELPER.DOC – Dokumenty bez stresu</title>
+    <style>
+        :root {
+            --bg: #050608;
+            --blue: #24c4ff;
+            --blue-soft: #17a4db;
+            --text: #f5f5f5;
+            --muted: #b0b0b0;
+            --card-bg: #0d0f14;
+            --accent: #1b1f2a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #111827 0, var(--bg) 40%, #000 100%);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .wrapper {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 1.5rem 1.2rem 3rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 0 1.5rem;
+        }
+
+        .logo-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .logo-name {
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--blue);
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.2rem;
+            font-size: 0.8rem;
+        }
+
+        nav a {
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--blue);
+        }
+
+        .hero {
+            padding: 2.5rem 0 2rem;
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .hero-title span {
+            color: var(--blue);
+        }
+
+        .hero-text {
+            margin-top: 1rem;
+            color: var(--muted);
+            font-size: 0.98rem;
+            max-width: 34rem;
+        }
+
+        .hero-badges {
+            margin-top: 1.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            font-size: 0.72rem;
+        }
+
+        .badge {
+            border-radius: 999px;
+            border: 1px solid var(--accent);
+            padding: 0.25rem 0.7rem;
+            background: rgba(11, 15, 25, 0.85);
+            color: var(--muted);
+        }
+
+        .badge strong {
+            color: var(--blue);
+        }
+
+        .hero-actions {
+            margin-top: 1.6rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+
+        .btn {
+            border-radius: 999px;
+            padding: 0.6rem 1.4rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid transparent;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue), var(--blue-soft));
+            color: #000;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: var(--accent);
+            color: var(--text);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+        }
+
+        .hero-side {
+            border-radius: 18px;
+            background: radial-gradient(circle at top left, #1f2937 0, #020617 55%);
+            padding: 1.5rem 1.4rem;
+            border: 1px solid #111827;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-side::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background-image:
+                radial-gradient(circle at 10% 10%, rgba(36,196,255,0.18) 0, transparent 55%),
+                radial-gradient(circle at 90% 90%, rgba(36,196,255,0.12) 0, transparent 60%);
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        .hero-card {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            font-size: 0.7rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+        }
+
+        .hero-number {
+            margin-top: 0.4rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--blue);
+        }
+
+        .hero-list {
+            margin-top: 1rem;
+            list-style: none;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .hero-list li {
+            margin-bottom: 0.35rem;
+        }
+
+        .hero-list li::before {
+            content: "•";
+            color: var(--blue);
+            margin-right: 0.4rem;
+        }
+
+        section {
+            padding: 1.5rem 0;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-sub {
+            font-size: 0.96rem;
+            color: var(--muted);
+            margin-bottom: 1.2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1rem 1rem 1.1rem;
+            border: 1px solid #111827;
+        }
+
+        .card h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.35rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--blue);
+        }
+
+        .card p {
+            font-size: 0.87rem;
+            color: var(--muted);
+        }
+
+        .card ul {
+            margin-top: 0.4rem;
+            padding-left: 1.1rem;
+            font-size: 0.87rem;
+            color: var(--muted);
+        }
+
+        .card ul li {
+            margin-bottom: 0.2rem;
+        }
+
+        .price {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
+        .price small {
+            display: block;
+            font-weight: 400;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 0.8rem;
+        }
+
+        .step {
+            display: flex;
+            gap: 0.7rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 26px;
+            height: 26px;
+            border-radius: 999px;
+            border: 1px solid var(--blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            color: var(--blue);
+            margin-top: 0.1rem;
+        }
+
+        .step h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .step p {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+            gap: 1.5rem;
+        }
+
+        .contact-list {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .contact-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-label {
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            color: var(--muted);
+            display: block;
+        }
+
+        .contact-value {
+            font-size: 0.96rem;
+        }
+
+        .contact-value a {
+            color: var(--blue);
+        }
+
+        form {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1rem 1rem 1.1rem;
+            border: 1px solid #111827;
+            font-size: 0.9rem;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--muted);
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #1f2937;
+            background: #020617;
+            color: var(--text);
+            padding: 0.55rem 0.6rem;
+            margin-bottom: 0.7rem;
+            font-size: 0.9rem;
+        }
+
+        form textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        form button {
+            margin-top: 0.2rem;
+        }
+
+        .note {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-top: 0.4rem;
+        }
+
+        footer {
+            border-top: 1px solid #111827;
+            padding-top: 1rem;
+            margin-top: 2rem;
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        footer p {
+            margin-bottom: 0.4rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                flex-wrap: wrap;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-side {
+                order: -1;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <div class="logo-block">
+            <div class="logo-name">OFFICEHELPER.DOC</div>
+            <div class="logo-sub">BUSINESS WORK · DOKUMENTY NA MIERU</div>
+        </div>
+        <nav>
+            <a href="#sluzby">Služby</a>
+            <a href="#cennik">Cenník</a>
+            <a href="#proces">Ako to funguje</a>
+            <a href="#kontakt">Kontakt</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero">
+            <div>
+                <h1 class="hero-title">
+                    Dokumenty <span>bez stresu</span><br>
+                    pre ľudí aj firmy
+                </h1>
+                <p class="hero-text">
+                    OFFICHELPER.DOC vám pomôže s prípravou podkladov k žalobám, zmluvám,
+                    žiadostiam, reklamáciám a ďalším dokumentom. Jasne, zrozumiteľne
+                    a v termíne, ktorý potrebujete.
+                </p>
+
+                <div class="hero-badges">
+                    <div class="badge"><strong>1</strong>&nbsp;kontakt = hotový dokument</div>
+                    <div class="badge">Zameranie na spotrebiteľské a bežné občianske prípady</div>
+                    <div class="badge">Diskrétnosť a ochrana osobných údajov</div>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="#kontakt" class="btn btn-primary">Chcem vypracovať dokument</a>
+                    <a href="#cennik" class="btn btn-outline">Pozrieť cenník</a>
+                </div>
+            </div>
+
+            <aside class="hero-side">
+                <div class="hero-card">
+                    <div class="hero-label">Špecializácia služieb</div>
+                    <div class="hero-number">OFFICEHELPER.DOC</div>
+                    <ul class="hero-list">
+                        <li>podklady k žalobám a návrhom</li>
+                        <li>zmluvy a dodatky (najmä PZP, kúpa/predaj, telekom služby)</li>
+                        <li>reklamácie, žiadosti, odvolania</li>
+                        <li>štandardizované vzory dokumentov na mieru</li>
+                    </ul>
+                </div>
+            </aside>
+        </section>
+
+        <!-- SLUŽBY -->
+        <section id="sluzby">
+            <h2 class="section-title">Služby</h2>
+            <p class="section-sub">
+                Vyberte si z pripravených balíkov alebo ma kontaktujte s vašou konkrétnou situáciou.
+            </p>
+            <div class="grid">
+                <div class="card">
+                    <h3>A · Dokumenty na mieru</h3>
+                    <p>Príprava textu dokumentu podľa vašej situácie.</p>
+                    <ul>
+                        <li>odvolania, žiadosti, reklamácie</li>
+                        <li>podania na úrady a inštitúcie</li>
+                        <li>podklady k žalobám a návrhom</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>B · Biznis balík</h3>
+                    <p>Podklady pre menších podnikateľov a živnostníkov.</p>
+                    <ul>
+                        <li>VOP, interné smernice</li>
+                        <li>jednoduché obchodné zmluvy</li>
+                        <li>GDPR texty k formulárom a webu</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>C · Administratívne služby</h3>
+                    <p>Texty a šablóny, ktoré vám ušetria čas.</p>
+                    <ul>
+                        <li>prepisy, sumarizácie, úprava textov</li>
+                        <li>štandardné žiadosti a vyhlásenia</li>
+                        <li>sprievodné listy, e-maily, podania</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>D · Auto balík</h3>
+                    <p>Praktické dokumenty spojené s vozidlom.</p>
+                    <ul>
+                        <li>kúpno-predajné zmluvy k autu</li>
+                        <li>výpovede PZP / havarijného poistenia</li>
+                        <li>plné moci a čestné vyhlásenia</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>E · Premium Express</h3>
+                    <p>Uprednostnené spracovanie s krátkou dodacou lehotou.</p>
+                    <ul>
+                        <li>priorita spracovania</li>
+                        <li>komunikácia počas prípravy dokumentu</li>
+                        <li>orientačné pripomienky k textu</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CENNÍK -->
+        <section id="cennik">
+            <h2 class="section-title">Cenník</h2>
+            <p class="section-sub">
+                Ceny sú orientačné. Konečnú cenu vždy potvrdím vopred podľa náročnosti zadania.
+            </p>
+            <div class="grid">
+                <div class="card">
+                    <h3>Jednoduchý dokument</h3>
+                    <p>Krátke texty a štandardné situácie.</p>
+                    <div class="price">
+                        od 15 €<small>žiadosti, reklamácie, jednoduché vyhlásenia</small>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Zložitejší dokument</h3>
+                    <p>Viacstranové alebo obsahovo náročnejšie texty.</p>
+                    <div class="price">
+                        od 25 – 35 €<small>odvolania, podania, kombinované dokumenty</small>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Zmluvy a právne dokumenty</h3>
+                    <p>Texty zmluvného typu a náročnejšie podklady.</p>
+                    <div class="price">
+                        od 40 – 60 €<small>zmluvy, dohody, komplexnejšie dodatky</small>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Premium Express</h3>
+                    <p>Uprednostnené spracovanie dokumentu v krátkom čase.</p>
+                    <div class="price">
+                        + 15 – 25 €<small>príplatok k zvolenej službe podľa termínu</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROCES -->
+        <section id="proces">
+            <h2 class="section-title">Ako to funguje</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h4>Kontakt</h4>
+                        <p>
+                            Napíš mi správu, e-mail alebo zavolaj. V krátkosti popíš svoju situáciu
+                            a čo od dokumentu očakávaš.
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h4>Potvrdenie a cena</h4>
+                        <p>
+                            Spýtam sa na chýbajúce údaje, navrhnem riešenie a potvrdím cenu.
+                            Po odsúhlasení začnem pracovať na texte.
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h4>Dodanie dokumentu</h4>
+                        <p>
+                            Hotový dokument dostaneš v dohodnutom formáte (Word / PDF).
+                            Podľa potreby vieme spraviť jednu drobnú úpravu navyše.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KONTAKT -->
+        <section id="kontakt">
+            <h2 class="section-title">Kontakt</h2>
+            <p class="section-sub">
+                Najrýchlejšie ma zastihneš cez Instagram alebo e-mail. Ak preferuješ telefonát,
+                napíš SMS a navrhnem ti čas, kedy sa ti môžem venovať.
+            </p>
+            <div class="contact-grid">
+                <div>
+                    <ul class="contact-list">
+                        <li>
+                            <span class="contact-label">E-mail</span>
+                            <span class="contact-value">
+                                <a href="mailto:officehelper.doc@gmail.com">officehelper.doc@gmail.com</a>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="contact-label">Telefón</span>
+                            <span class="contact-value">
+                                <a href="tel:+421948345087">+421 948 345 087</a>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="contact-label">Instagram</span>
+                            <span class="contact-value">
+                                <a href="https://www.instagram.com/officehelper.doc" target="_blank">@officehelper.doc</a>
+                            </span>
+                        </li>
+                    </ul>
+                    <p class="note">
+                        V správe mi prosím naznač, o aký typ dokumentu ide
+                        (napr. „výpoveď PZP“, „podklady k žalobe Orange“, „kúpno-predajná zmluva k autu“…).
+                    </p>
+                </div>
+
+                <form action="mailto:officehelper.doc@gmail.com" method="post" enctype="text/plain">
+                    <label for="meno">Meno a priezvisko</label>
+                    <input id="meno" name="Meno" type="text" placeholder="Vaše meno" required>
+
+                    <label for="email">E-mail</label>
+                    <input id="email" name="Email" type="email" placeholder="vas@email.sk" required>
+
+                    <label for="sprava">Stručne opíšte, čo potrebujete</label>
+                    <textarea id="sprava" name="Sprava" placeholder="Popis situácie, termín, typ dokumentu..." required></textarea>
+
+                    <button type="submit" class="btn btn-primary">Odoslať dopyt</button>
+                    <p class="note">
+                        Odoslaním formulára súhlasíte so spracovaním osobných údajov na účely vybavenia vášho dopytu.
+                    </p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            OFFICHELPER.DOC neposkytuje advokátske služby podľa zákona o advokácii.
+            Ide o pomoc s prípravou administratívnych a zmluvných podkladov.
+            Pri zložitejších alebo sporných veciach odporúčam konzultáciu s advokátom.
+        </p>
+        <p>
+            Osobné údaje spracúvam len v rozsahu potrebnom na vybavenie vašej objednávky.
+            Podrobnejšie informácie vám zašlem na požiadanie (GDPR).
+        </p>
+        <p>© <span id="year"></span> OFFICEHELPER.DOC</p>
+    </footer>
+</div>
+
+<script>
+    // aktuálny rok vo footeri
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
